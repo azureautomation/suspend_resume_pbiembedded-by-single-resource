@@ -1,0 +1,20 @@
+{
+    "Author": "Jayendran arumugam",
+    "ContentSize": 2546,
+    "ContentUrl": "https://raw.githubusercontent.com/azureautomation/suspend_resume_pbiembedded-by-single-resource/master/Suspend_Resume_PBI-Embedded.ps1",
+    "DownloadCount": 1269,
+    "Id": "SuspendResumePBI-Embedded-dd630405",
+    "IsFederated": false,
+    "IsWorkflow": true,
+    "Popularity": 73,
+    "RaterCount": 0,
+    "Rating": 0.0,
+    "ReleaseDate": "2019-1-17T00:00:00",
+    "RunbookKind": 6,
+    "RunbookKindString": "PowerShell Workflow",
+    "Summary": "This script suspends/Resume the PowerBI\u00a0 Embedded Capacity in Azure by a given PBE resource name.Pre-Requisites\u00a0Install\u00a0AzureRM.PowerBIEmbedded\u00a0moduleYou have to create your automation account as Run As Account feature, sine this script uses AzureRunAsConnection for authentic",
+    "Title": "Suspend_Resume_PBI-Embedded by Single resource",
+    "UpdatedDate": "2019-1-17T00:00:00",
+    "Url": "https://github.com/azureautomation/suspend_resume_pbiembedded-by-single-resource",
+    "UserTags": "Powershell, PowerShell Workflow, PowerBI"
+}

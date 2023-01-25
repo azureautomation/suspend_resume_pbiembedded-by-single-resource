@@ -12,9 +12,9 @@ This script suspends/Resume the PowerBI  Embedded Capacity in Azure by a given 
 **Pre-Requisites **
 
 
-  *  Install [AzureRM.PowerBIEmbedded](https://docs.microsoft.com/en-us/powershell/module/azurerm.powerbiembedded/?view=azurermps-6.13.0) module
+  *  Install [Az.PowerBIEmbedded](https://learn.microsoft.com/en-us/powershell/module/az.powerbiembedded) module
 
-  *  You have to create your automation account as Run As Account feature, sine this script uses AzureRunAsConnection for authentication against Azure.
+  *  You have to create your automation account as System-assigned managed identity feature, since this script uses Connect-AzAccount for authentication against Azure.
 
 
  

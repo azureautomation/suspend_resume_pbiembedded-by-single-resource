@@ -22,7 +22,8 @@ This script suspends/Resume the PowerBI  Embedded Capacity in Azure by a given 
 **Parameters for the Script **
 
  
-
+SubscriptionId
+  *  **SubscriptionId :** The Subscription Id Automation Account & PowerBI Embedded Capacity which you want to Suspend or Resume.
 
   *  **PowerBIEmbeddedName :** The Name of the PowerBI Embedded Capacity which you want to Suspend or Resume.
 

@@ -1,7 +1,9 @@
-﻿workflow Suspend_Resume_PBI-Embedded
+workflow Suspend_Resume_PBI-Embedded
 {
     Param 
-    (    
+    (
+        [Parameter(Mandatory=$true)]   
+        $SubscriptionId, 
         [Parameter(Mandatory=$true)] 
         [String] 
         $AzureResourceGroup,
@@ -12,31 +14,24 @@
         [Boolean] 
         $Suspend
     )  
-    $connectionName = "AzureRunAsConnection" 
- 
-    try 
-    { 
-        # Get the connection "AzureRunAsConnection " 
-        $servicePrincipalConnection=Get-AutomationConnection -Name $connectionName          
- 
+    
+    #Please enable appropriate RBAC permissions to the system identity of this automation account. Otherwise, the runbook may fail...
+
+    try
+    {
         "Logging in to Azure..." 
-        Add-AzureRmAccount -ServicePrincipal -TenantId $servicePrincipalConnection.TenantId -ApplicationId $servicePrincipalConnection.ApplicationId -CertificateThumbprint $servicePrincipalConnection.CertificateThumbprint  
-              
-    } 
-    catch { 
-        if (!$servicePrincipalConnection) 
-        { 
-            $ErrorMessage = "Connection $connectionName not found." 
-            throw $ErrorMessage 
-        } else{ 
-            Write-Error -Message $_.Exception 
-            throw $_.Exception 
-        } 
+        Disable-AzContextAutosave -Scope Process 
+        Connect-AzAccount -Identity
+        $AzureContext = Set-AzContext -SubscriptionId $SubscriptionId    
+    }
+    catch {
+        Write-Error -Message $_.Exception
+        throw $_.Exception
     }
 
     #checking if the PowerBI Embedded Capacity Exisit 
 
-    $IsPBEmbExisit=Test-AzureRmPowerBIEmbeddedCapacity -Name $PowerBIEmbeddedName
+    $IsPBEmbExisit = Test-AzPowerBIEmbeddedCapacity -Name $PowerBIEmbeddedName -DefaultProfile $AzureContext
 
     if($IsPBEmbExisit -eq $true)
     {
@@ -47,7 +42,7 @@
                 #Suspending the Service 
 
                 "Suspending $PowerBIEmbeddedName started"
-                $SuspendOperation = Suspend-AzureRmPowerBIEmbeddedCapacity -Name $PowerBIEmbeddedName -ResourceGroupName $AzureResourceGroup -PassThru
+                $SuspendOperation = Suspend-AzPowerBIEmbeddedCapacity -Name $PowerBIEmbeddedName -ResourceGroupName $AzureResourceGroup -PassThru -DefaultProfile $AzureContext
                 "$PowerBIEmbeddedName is Suspended Successfully"
             }
             catch
@@ -64,7 +59,7 @@
                 #Resuming the Service 
 
                 "Resuming $PowerBIEmbeddedName"
-                $ResumeOperation = Resume-AzureRmPowerBIEmbeddedCapacity -Name $PowerBIEmbeddedName -ResourceGroupName $AzureResourceGroup -PassThru
+                $ResumeOperation = Resume-AzPowerBIEmbeddedCapacity -Name $PowerBIEmbeddedName -ResourceGroupName $AzureResourceGroup -PassThru -DefaultProfile $AzureContext
                 "$PowerBIEmbeddedName Resumed Successfully "
             }
             catch

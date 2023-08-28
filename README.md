@@ -12,19 +12,18 @@ This script suspends/Resume the PowerBI  Embedded Capacity in Azure by a given 
 **Pre-Requisites **
 
 
-  *  Install [AzureRM.PowerBIEmbedded](https://docs.microsoft.com/en-us/powershell/module/azurerm.powerbiembedded/?view=azurermps-6.13.0) module
+  *  Install [[Az.PowerBIEmbedded]](https://www.powershellgallery.com/packages/Az.PowerBIEmbedded/1.2.1) module
 
-  *  You have to create your automation account as Run As Account feature, sine this script uses AzureRunAsConnection for authentication against Azure.
-
+  *  You have to create your automation account with a Managed Identity.
 
  
 
 
 **Parameters for the Script **
 
-
  
-
+SubscriptionId
+  *  **SubscriptionId :** The Subscription Id Automation Account & PowerBI Embedded Capacity which you want to Suspend or Resume.
 
   *  **PowerBIEmbeddedName :** The Name of the PowerBI Embedded Capacity which you want to Suspend or Resume.
 
